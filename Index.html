@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feliz Navidad, Princesa</title>
+    <style>
+        :root {
+            --bg: #07030f;
+            --neon1: #ff4dff;
+            --neon2: #00f7ff;
+            --neon3: #8bff5a;
+            --text: #f7f2ff;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: system-ui, Segoe UI, Roboto, Arial
+        }
+
+        body {
+            background: radial-gradient(1200px 600px at 20% 10%, rgba(255, 77, 255, .18), transparent 60%),
+                radial-gradient(1000px 600px at 90% 30%, rgba(0, 247, 255, .16), transparent 55%),
+                radial-gradient(900px 600px at 50% 90%, rgba(139, 255, 90, .10), transparent 55%),
+                var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Estrellitas */
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .7;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, .8) 40%, transparent 41%),
+                radial-gradient(1px 1px at 70% 10%, rgba(255, 255, 255, .7) 40%, transparent 41%),
+                radial-gradient(1.5px 1.5px at 40% 80%, rgba(255, 255, 255, .7) 40%, transparent 41%),
+                radial-gradient(1px 1px at 85% 70%, rgba(255, 255, 255, .6) 40%, transparent 41%),
+                radial-gradient(2px 2px at 10% 65%, rgba(255, 255, 255, .6) 40%, transparent 41%);
+            background-repeat: repeat;
+            background-size: 260px 220px;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, .25));
+            animation: drift 18s linear infinite;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translateY(0)
+            }
+
+            to {
+                transform: translateY(40px)
+            }
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(7, 3, 15, .85), rgba(7, 3, 15, .35));
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 14px 18px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: .6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--neon2);
+            box-shadow: 0 0 10px var(--neon2), 0 0 24px rgba(0, 247, 255, .6);
+        }
+
+        .links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .links a {
+            text-decoration: none;
+            color: var(--text);
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .10);
+            background: rgba(255, 255, 255, .03);
+            transition: .2s transform, .2s background, .2s border;
+            font-size: 14px;
+        }
+
+        .links a:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, .06);
+            border-color: rgba(0, 247, 255, .35);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 18px 70px
+        }
+
+        section {
+            min-height: calc(100vh - 90px);
+            display: grid;
+            place-items: center;
+            padding: 30px 0;
+        }
+
+        .card {
+            width: min(980px, 100%);
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, .10);
+            background: rgba(10, 6, 20, .55);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .35);
+            padding: 28px 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: conic-gradient(from 180deg,
+                    rgba(255, 77, 255, .0),
+                    rgba(255, 77, 255, .55),
+                    rgba(0, 247, 255, .55),
+                    rgba(139, 255, 90, .40),
+                    rgba(255, 77, 255, .0));
+            filter: blur(18px);
+            opacity: .45;
+            z-index: 0;
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1
+        }
+
+        .neon-title {
+            text-align: center;
+            margin: 6px 0 12px;
+            font-size: clamp(34px, 6vw, 70px);
+            line-height: 1.05;
+            color: var(--text);
+            text-shadow:
+                0 0 6px rgba(255, 255, 255, .25),
+                0 0 18px rgba(255, 77, 255, .65),
+                0 0 40px rgba(255, 77, 255, .35),
+                0 0 18px rgba(0, 247, 255, .35);
+            letter-spacing: .6px;
+        }
+
+        .neon-sub {
+            text-align: center;
+            margin: 0 auto 18px;
+            max-width: 60ch;
+            color: rgba(247, 242, 255, .88);
+            font-size: clamp(14px, 2.2vw, 18px);
+        }
+
+        .pill-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .pill {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .03);
+            box-shadow:
+                0 0 14px rgba(0, 247, 255, .12),
+                inset 0 0 14px rgba(255, 77, 255, .06);
+            font-size: 14px;
+        }
+
+        .big-neon {
+            display: grid;
+            gap: 16px;
+            justify-items: center;
+            padding: 10px 0 6px;
+        }
+
+        .tree {
+            width: 150px;
+            height: 150px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .03);
+            box-shadow: 0 0 24px rgba(139, 255, 90, .18);
+            font-size: 68px;
+            filter: drop-shadow(0 0 18px rgba(139, 255, 90, .25));
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.03)
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(0, 247, 255, .35);
+            background: rgba(0, 247, 255, .07);
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 650;
+            transition: .2s transform, .2s filter;
+            user-select: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.12)
+        }
+
+        .btn:active {
+            transform: translateY(0px);
+            filter: brightness(1.0)
+        }
+
+        footer {
+            opacity: .75;
+            text-align: center;
+            padding: 18px 12px;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(7, 3, 15, .35);
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth
+        }
+
+        /* Pequeño efecto de “neón flicker” opcional */
+        .flicker {
+            animation: flicker 6s infinite;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            2% {
+                opacity: .92;
+            }
+
+            3% {
+                opacity: 1;
+            }
+
+            55% {
+                opacity: 1;
+            }
+
+            56% {
+                opacity: .85;
+            }
+
+            58% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <span class="dot"></span>
+                <span>felicidades por este año</span>
+            </div>
+            <nav class="links">
+                <a href="#pagina1">feliz navidad</a>
+                <a href="#pagina2">deseo</a>
+                <a href="#pagina3">regalo</a>
+                <a href="#pagina4">Carta</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Página 1 -->
+        <section id="pagina1">
+            <div class="card">
+                <div class="content big-neon">
+                    <div class="tree">🎄</div>
+                    <h1 class="neon-title flicker">Feliz Navidad, Princesa</h1>
+                    <p class="neon-sub">
+                        Que estas navidad la puedas disfrutar con tranquilidad y con mucho amor. ✨
+                    </p>
+                    <div class="pill-row">
+                        <span class="pill">💖 Amor</span>
+                        <span class="pill">🎁 Regalos</span>
+                        <span class="pill">⭐ Magia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página 2 -->
+        <section id="pagina2">
+            <div class="card">
+                <div class="content">
+                    <h2 class="neon-title" style="font-size:clamp(28px,4.6vw,52px)">Feliz Navidad, Princesa</h2>
+                    <p class="neon-sub">
+                        Mi deseo para esta navida es simple: que estés bien y sonrías mucho.
+                    </p>
+                    <div class="pill-row">
+                        <span class="pill">🌟 Momentos felices</span>
+                        <span class="pill">❄️ Noche fresca</span>
+                        <span class="pill">🍫 Algo rico</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página 3 -->
+        <section id="pagina3">
+            <div class="card">
+                <div class="content">
+                    <h2 class="neon-title" style="font-size:clamp(28px,4.6vw,52px)">Aca hay un regalo extra para vos
+                    </h2>
+                    <p class="neon-sub">
+                        Tocá el botón para un mensajito sorpresa
+                    </p>
+
+                    <div style="display:flex; justify-content:center; margin-top:14px;">
+                        <button class="btn" id="btnSorpresa">✨ Abrir sorpresa</button>
+                    </div>
+
+                    <p id="sorpresa"
+                        style="text-align:center; margin:18px auto 0; max-width:60ch; opacity:.95; font-size:clamp(14px,2.2vw,18px)">
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Página 4 -->
+        <section id="pagina4">
+            <div class="card">
+                <div class="content">
+                    <h2 class="neon-title" style="font-size:clamp(26px,4.5vw,50px)">
+                        Para vos, Victoria
+                    </h2>
+
+                    <p class="neon-sub">
+                        Una carta escrita desde el corazón 💖
+                    </p>
+
+                    <div style="
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 18px 20px;
+        border-radius: 16px;
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(255,255,255,.12);
+        box-shadow: inset 0 0 20px rgba(255,77,255,.08);
+        line-height: 1.7;
+        font-size: clamp(15px,2.2vw,18px);
+      ">
+                        <p>
+                            Querida Victoria,
+                        </p>
+
+                        <p>
+                            En esta Navidad quería regalarte algo distinto.
+                            No solo algo que se envuelva en papel, sino algo que se lea con calma.
+                        </p>
+
+                        <p>
+                            Gracias por existir, por tu forma de ser y por cada momento,
+                            incluso los silencios. Ojalá esta magica noche la pases sonriendo y disfrutando con todas
+                            las cosas que te hacen bien,
+                            sonrisas sinceras y sueños que empiecen a cumplirse.
+                            Sos alguien maravillosa, y mereces todo lo lindo que la vida pueda ofrecerte.
+                            Gracias por ser como sos, por tu cariño y por cada instante compartido.
+                        </p>
+
+                        <p>
+                            Pase lo que pase, deseo que siempre recuerdes lo valiosa que sos.
+                        </p>
+
+                        <p style="margin-top:18px;">
+                            Con cariño,<br>
+                            <strong>Agustin, "toffu".</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Que la vida siempre te de mucha felicidad y sonrisas.🎄✨
+    </footer>
+
+    <script>
+        const frases = [
+            "Que esta Navidad te regale momentos que se queden para siempre ✨",
+            "Princesa, que tengas una noche hermosa y un año nuevo lleno de sueños 💖",
+            "Que la vida te sorprenda con las cosas lindas que siempre mereciste, hoy y siempre 🎁",
+            "Vos sos la estrellita de navidad 🌟"
+        ];
+
+        document.getElementById("btnSorpresa").addEventListener("click", () => {
+            const el = document.getElementById("sorpresa");
+            const pick = frases[Math.floor(Math.random() * frases.length)];
+            el.textContent = pick;
+        });
+    </script>
+</body>
+
+</html>
